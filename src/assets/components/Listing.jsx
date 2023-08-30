@@ -1,7 +1,7 @@
 import Labels from "./Labels";
 import Label from "./Label";
 
-function Listing({ listing }) {
+function Listing({ listing, onSelectedFilters }) {
   const tags = [listing.role, listing.level, ...listing.languages];
 
   return (
@@ -43,7 +43,11 @@ function Listing({ listing }) {
       <div>
         <Labels>
           {tags.map((tag) => (
-            <Label key={crypto.randomUUID()} tag={tag} />
+            <Label
+              key={crypto.randomUUID()}
+              tag={tag}
+              onSelectedFilters={onSelectedFilters}
+            />
           ))}
         </Labels>
       </div>
