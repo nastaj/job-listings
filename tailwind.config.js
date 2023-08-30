@@ -5,6 +5,9 @@ export default {
     fontFamily: {
       sans: ['"League Spartan"', "sans-serif"],
     },
+    boxShadow: {
+      sm: "0px 15px 15px 15px rgba(0, 0, 0, 0.03);",
+    },
     extend: {
       colors: {
         primary: "hsl(180, 29%, 50%)",
@@ -12,6 +15,9 @@ export default {
         tablets: "hsl(180, 31%, 95%)",
         "cyan-light": "hsl(180, 8%, 52%)",
         "cyan-dark": "hsl(180, 14%, 20%)",
+      },
+      backgroundImage: {
+        header: "url('src/assets/images/bg-header-desktop.svg')",
       },
     },
   },
