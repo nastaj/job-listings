@@ -34,34 +34,53 @@ function App() {
     getListings();
   }, []);
 
-  useEffect(() => {
-    setFilteredListings(
-      listings.filter((listing) => {
-        let filterConditions = 0;
+  useEffect(
+    function () {
+      setFilteredListings(
+        listings.filter((listing) => {
+          let filterConditions = 0;
 
-        if (selectedFilters.includes(listing.role)) {
-          filterConditions++;
-        }
-        if (selectedFilters.includes(listing.level)) {
-          filterConditions++;
-        }
-        if (
-          selectedFilters.some((filter) => listing.languages.includes(filter))
-        ) {
-          filterConditions++;
-        }
-        if (selectedFilters.some((filter) => listing.tools.includes(filter))) {
-          filterConditions++;
-        }
+          if (selectedFilters.includes(listing.role)) {
+            filterConditions++;
+          }
 
-        return filterConditions === selectedFilters.length;
-      })
-    );
-  }, [selectedFilters, listings]);
+          if (selectedFilters.includes(listing.level)) {
+            filterConditions++;
+          }
+
+          if (
+            selectedFilters.some((filter) => listing.languages.includes(filter))
+          ) {
+            const selectedLanguages = selectedFilters.filter((filter) =>
+              listing.languages.includes(filter)
+            );
+            selectedLanguages.length > 1
+              ? (filterConditions += 2)
+              : filterConditions++;
+          }
+
+          if (
+            selectedFilters.some((filter) => listing.tools.includes(filter))
+          ) {
+            const selectedTools = selectedFilters.filter((filter) =>
+              listing.tools.includes(filter)
+            );
+            selectedTools.length > 1
+              ? (filterConditions += 2)
+              : filterConditions++;
+          }
+
+          return filterConditions === selectedFilters.length;
+        })
+      );
+    },
+    [selectedFilters, listings]
+  );
 
   return (
     <>
       <HeaderBackground />
+
       <main className="font-sans flex items-center bg-background flex-col min-h-screen">
         <section className="min-h-[96px] w-3/4 -translate-y-1/2">
           <AnimatePresence>
@@ -81,6 +100,7 @@ function App() {
             )}
           </AnimatePresence>
         </section>
+
         <Listings selectedFilters={selectedFilters}>
           <AnimatePresence>
             {filteredListings.length > 0 ? (
