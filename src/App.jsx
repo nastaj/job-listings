@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-
+import { AnimatePresence, motion } from "framer-motion";
 import HeaderBackground from "./assets/components/HeaderBackground";
 import Listings from "./assets/components/Listings";
 import Listing from "./assets/components/Listing";
 import Panel from "./assets/components/Panel";
-import { AnimatePresence, motion } from "framer-motion";
+import Footer from "./assets/components/Footer";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
   const [listings, setListings] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [filteredListings, setFilteredListings] = useState([]);
@@ -24,11 +25,14 @@ function App() {
   useEffect(function () {
     async function getListings() {
       try {
-        const res = await fetch("src/data.json");
+        setIsLoading(true);
+        const res = await fetch("data.json");
         const data = await res.json();
         setListings(data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     }
     getListings();
@@ -79,7 +83,7 @@ function App() {
     <>
       <HeaderBackground />
 
-      <main className="font-sans flex items-center bg-background flex-col min-h-screen">
+      <main className="font-sans flex items-center bg-background flex-col min-h-screen ">
         <section className="min-h-[96px] w-3/4 2xl:w-full 2xl:px-6 -translate-y-1/2">
           <AnimatePresence>
             {selectedFilters.length > 0 && (
@@ -101,7 +105,7 @@ function App() {
 
         <Listings selectedFilters={selectedFilters}>
           <AnimatePresence>
-            {filteredListings.length > 0 ? (
+            {filteredListings.length > 0 &&
               filteredListings.map((listing) => (
                 <motion.li
                   initial={{ opacity: 0, x: 100, height: 0 }}
@@ -114,15 +118,20 @@ function App() {
                     onSelectedFilters={setSelectedFilters}
                   />
                 </motion.li>
-              ))
-            ) : (
+              ))}
+
+            {!filteredListings && (
               <p className="text-center text-xl">
                 No results. Try changing your filters.
               </p>
             )}
+
+            {isLoading && <p className="text-center text-xl">Loading...</p>}
           </AnimatePresence>
         </Listings>
       </main>
+
+      <Footer />
     </>
   );
 }
