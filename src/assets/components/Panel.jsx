@@ -1,6 +1,6 @@
 function Panel({ selectedFilters, onDelete, onClearFilters }) {
   return (
-    <div className=" bg-white w-3/4 flex justify-between px-8 py-4 mb-8 rounded-md shadow-sm">
+    <>
       <div className="flex gap-8">
         {selectedFilters.map((filter) => {
           return (
@@ -9,7 +9,7 @@ function Panel({ selectedFilters, onDelete, onClearFilters }) {
                 {filter}
               </div>
               <button
-                className="bg-primary px-2 hover:bg-black"
+                className="bg-primary px-2 hover:bg-black transition-all"
                 onClick={() => onDelete(filter)}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
@@ -24,8 +24,13 @@ function Panel({ selectedFilters, onDelete, onClearFilters }) {
           );
         })}
       </div>
-      <button onClick={onClearFilters}>Clear</button>
-    </div>
+      <button
+        className="text-cyan-dark text-lg font-bold hover:text-primary hover:underline transition-all"
+        onClick={onClearFilters}
+      >
+        Clear
+      </button>
+    </>
   );
 }
 
