@@ -4,7 +4,7 @@ import PanelClearButton from "./PanelClearButton";
 function Panel({ selectedFilters, onDelete, onClearFilters }) {
   return (
     <>
-      <div className="flex gap-8">
+      <div className="flex gap-8 2xl:gap-4 2xl:flex-wrap">
         {selectedFilters.map((filter) => {
           return (
             <PanelLabelButton

@@ -8,6 +8,11 @@ export default {
     boxShadow: {
       sm: "0px 15px 15px 15px rgba(0, 0, 0, 0.03);",
     },
+    screens: {
+      "2xl": { max: "1300px" },
+      xl: { max: "996px" },
+      lg: { max: "365px" },
+    },
     extend: {
       colors: {
         primary: "hsl(180, 29%, 50%)",

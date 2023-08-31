@@ -54,9 +54,8 @@ function App() {
             const selectedLanguages = selectedFilters.filter((filter) =>
               listing.languages.includes(filter)
             );
-            selectedLanguages.length > 1
-              ? (filterConditions += 2)
-              : filterConditions++;
+
+            filterConditions += selectedLanguages.length;
           }
 
           if (
@@ -65,9 +64,8 @@ function App() {
             const selectedTools = selectedFilters.filter((filter) =>
               listing.tools.includes(filter)
             );
-            selectedTools.length > 1
-              ? (filterConditions += 2)
-              : filterConditions++;
+
+            filterConditions += selectedTools.length;
           }
 
           return filterConditions === selectedFilters.length;
@@ -82,14 +80,14 @@ function App() {
       <HeaderBackground />
 
       <main className="font-sans flex items-center bg-background flex-col min-h-screen">
-        <section className="min-h-[96px] w-3/4 -translate-y-1/2">
+        <section className="min-h-[96px] w-3/4 2xl:w-full 2xl:px-6 -translate-y-1/2">
           <AnimatePresence>
             {selectedFilters.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -100 }}
-                className=" bg-white w-full flex justify-between px-12 py-8 rounded-md shadow-sm"
+                className=" bg-white w-full flex xl:gap-1 justify-between px-12 py-8 rounded-md shadow-sm"
               >
                 <Panel
                   selectedFilters={selectedFilters}
