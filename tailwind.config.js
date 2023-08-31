@@ -22,7 +22,7 @@ export default {
         "cyan-dark": "hsl(180, 14%, 20%)",
       },
       backgroundImage: {
-        header: "url('src/assets/images/bg-header-desktop.svg')",
+        header: "url('/assets/images/bg-header-desktop.svg')",
       },
     },
   },

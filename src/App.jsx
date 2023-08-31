@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import HeaderBackground from "./assets/components/HeaderBackground";
-import Listings from "./assets/components/Listings";
-import Listing from "./assets/components/Listing";
-import Panel from "./assets/components/Panel";
-import Footer from "./assets/components/Footer";
+import HeaderBackground from "./components/HeaderBackground";
+import Listings from "./components/Listings";
+import Listing from "./components/Listing";
+import Panel from "./components/Panel";
+import Footer from "./components/Footer";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
